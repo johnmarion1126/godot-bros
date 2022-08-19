@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/GiditIdle.png-2c515a3756fc4668d701b1e57fc7e81d.stex"
+path="res://.import/GiditJump.png-c478f60930d8503d3f2d17c6f3535e7b.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/GiditIdle.png"
-dest_files=[ "res://.import/GiditIdle.png-2c515a3756fc4668d701b1e57fc7e81d.stex" ]
+source_file="res://assets/sprites/GiditJump.png"
+dest_files=[ "res://.import/GiditJump.png-c478f60930d8503d3f2d17c6f3535e7b.stex" ]
 
 [params]
 
