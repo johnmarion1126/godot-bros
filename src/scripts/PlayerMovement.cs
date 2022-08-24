@@ -4,6 +4,8 @@ using System;
 public class PlayerMovement : KinematicBody2D
 {
     private AnimatedSprite anim;
+    private bool isJumping = false;
+
     const float gravity = 800.0f;
     const int walkSpeed = 250;
     const int jumpSpeed = -450;
@@ -33,17 +35,19 @@ public class PlayerMovement : KinematicBody2D
             anim.Animation = "Walk";
             anim.FlipH = false;
         }
-        else
+        else if (!isJumping)
         {
             anim.Animation = "Idle";
             velocity.x = 0;
         }
 
-        if (isPressingUp)
+        if (isPressingUp && !isJumping)
         {
             velocity.y = jumpSpeed;
-            anim.Animation = "Jump";
+            isJumping = true;
         }
+
+        if (isJumping) anim.Animation = "Jump";
     }
 
   public override void _PhysicsProcess(float delta)
@@ -51,5 +55,9 @@ public class PlayerMovement : KinematicBody2D
     velocity.y += delta * gravity;
     getInput();
     MoveAndSlide(velocity, new Vector2(0, -1));
+  }
+
+  public void onCollisionEnter(Area2D area) {
+    if (area.Name == "Ground" ) isJumping = false;
   }
 }
