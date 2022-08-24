@@ -18,14 +18,14 @@ animations = [ {
 "name": "Walk",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 3 ) ],
-"loop": true,
-"name": "Jump",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 1 ) ],
 "loop": true,
 "name": "Idle",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 3 ) ],
+"loop": true,
+"name": "Jump",
 "speed": 5.0
 } ]
 
@@ -77,11 +77,13 @@ shape = SubResource( 4 )
 position = Vector2( 101, -116 )
 script = ExtResource( 7 )
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="Player"]
+[node name="PlayerAnimation" type="AnimatedSprite" parent="Player"]
 position = Vector2( 75, 305 )
 scale = Vector2( 4, 4 )
 frames = SubResource( 1 )
 animation = "Walk"
+frame = 1
+playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
 position = Vector2( 74, 307 )
