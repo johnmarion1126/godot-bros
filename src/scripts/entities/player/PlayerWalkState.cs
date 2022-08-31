@@ -12,7 +12,7 @@ class PlayerWalkState : PlayerBaseState {
     anim.Animation = "Walk";
   }
 
-  public override PlayerBaseState update(float delta)
+  public override IState update(float delta)
   {
     bool isPressingUp = Input.IsActionPressed("up");
     bool isPressingLeft = Input.IsActionPressed("left");

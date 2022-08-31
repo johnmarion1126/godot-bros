@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-class PlayerBaseState : KinematicBody2D {
+class PlayerBaseState : KinematicBody2D, IState {
   protected bool isJumping = false;
   protected float gravity = 800.0f;
   protected int walkSpeed = 250;
@@ -27,7 +27,7 @@ class PlayerBaseState : KinematicBody2D {
     return velocity;
   }
 
-  public virtual PlayerBaseState update(float delta) 
+  public virtual IState update(float delta) 
   {
     velocity.y += delta * gravity;
 
@@ -40,9 +40,9 @@ class PlayerBaseState : KinematicBody2D {
     return null;
   }
 
-  public void onGroundCollision()
+  public void processCollision(Area2D area)
   {
-    isJumping = false;
+    if (area.Name == "Ground" ) isJumping = false;
   }
 
 }

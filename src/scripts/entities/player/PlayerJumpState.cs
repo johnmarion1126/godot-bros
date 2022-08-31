@@ -17,7 +17,7 @@ class PlayerJumpState : PlayerBaseState {
     isJumping = true;
   }
 
-  public override PlayerBaseState update(float delta) 
+  public override IState update(float delta) 
   {
     bool isPressingLeft = Input.IsActionPressed("left");
     bool isPressingRight = Input.IsActionPressed("right");

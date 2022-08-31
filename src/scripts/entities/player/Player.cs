@@ -2,7 +2,7 @@ using Godot;
 using System;
 
 class Player : KinematicBody2D {
-  private PlayerBaseState currentState;
+  private IState currentState;
 
   public Vector2 velocity;
   public AnimatedSprite anim;
@@ -16,7 +16,7 @@ class Player : KinematicBody2D {
     currentState.enter();
   }
 
-  public void changeState(PlayerBaseState newState) 
+  public void changeState(IState newState) 
   {
     currentState = newState;
     currentState.enter();
@@ -24,13 +24,13 @@ class Player : KinematicBody2D {
 
   public override void _PhysicsProcess(float delta) 
   {
-    PlayerBaseState newState = currentState.update(delta);
+    IState newState = currentState.update(delta);
     if (newState != null) changeState(newState);
     velocity = currentState.getVelocity();
     MoveAndSlide(velocity, new Vector2(0, -1));
   }
 
   public void onCollisionEnter(Area2D area) {
-    if (area.Name == "Ground" ) currentState.onGroundCollision();
+    currentState.processCollision(area);
   }
 }
