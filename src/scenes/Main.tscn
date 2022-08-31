@@ -6,7 +6,7 @@
 [ext_resource path="res://assets/sprites/GiditWalk2.png" type="Texture" id=4]
 [ext_resource path="res://assets/sprites/GiditWalk4.png" type="Texture" id=5]
 [ext_resource path="res://assets/sprites/GiditWalk3.png" type="Texture" id=6]
-[ext_resource path="res://src/scripts/PlayerMovement.cs" type="Script" id=7]
+[ext_resource path="res://src/scripts/entities/player/Player.cs" type="Script" id=7]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -15,14 +15,14 @@ animations = [ {
 "name": "Walk",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 1 ) ],
-"loop": true,
-"name": "Idle",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 3 ) ],
 "loop": true,
 "name": "Jump",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 1 ) ],
+"loop": true,
+"name": "Idle",
 "speed": 5.0
 } ]
 
@@ -73,7 +73,7 @@ position = Vector2( 75, 305 )
 scale = Vector2( 4, 4 )
 frames = SubResource( 1 )
 animation = "Walk"
-frame = 2
+frame = 3
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
