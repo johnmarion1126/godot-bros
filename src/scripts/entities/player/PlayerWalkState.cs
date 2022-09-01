@@ -1,5 +1,4 @@
 using Godot;
-using System;
 
 class PlayerWalkState : PlayerBaseState {
 
@@ -14,18 +13,16 @@ class PlayerWalkState : PlayerBaseState {
 
   public override IState update(float delta)
   {
-    bool isPressingUp = Input.IsActionPressed("up");
-    bool isPressingLeft = Input.IsActionPressed("left");
-    bool isPressingRight = Input.IsActionPressed("right");
+    getInput();
 
     if (isPressingLeft)
     {
-      velocity.x = -walkSpeed;
+      velocity.x = -WALK_SPEED;
       anim.FlipH = true;
     }
     else if (isPressingRight)
     {
-      velocity.x = walkSpeed;
+      velocity.x = WALK_SPEED;
       anim.FlipH = false;
     }
     else if (isPressingUp)
@@ -37,7 +34,7 @@ class PlayerWalkState : PlayerBaseState {
       return new PlayerBaseState(anim, velocity);
     }
 
-    velocity.y += delta * gravity;
+    velocity.y += delta * GRAVITY_SCALE;
     return null;
   }
 }

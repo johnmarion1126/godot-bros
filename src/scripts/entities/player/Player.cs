@@ -1,5 +1,4 @@
 using Godot;
-using System;
 
 class Player : KinematicBody2D {
   private IState currentState;
@@ -22,15 +21,17 @@ class Player : KinematicBody2D {
     currentState.enter();
   }
 
+  public void onCollisionEnter(Area2D area) {
+    currentState.processCollision(area);
+  }
+  
   public override void _PhysicsProcess(float delta) 
   {
     IState newState = currentState.update(delta);
     if (newState != null) changeState(newState);
+
     velocity = currentState.getVelocity();
     MoveAndSlide(velocity, new Vector2(0, -1));
   }
 
-  public void onCollisionEnter(Area2D area) {
-    currentState.processCollision(area);
-  }
 }

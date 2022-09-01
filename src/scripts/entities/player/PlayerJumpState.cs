@@ -1,8 +1,4 @@
 using Godot;
-using System;
-
-// TODO: Create an entity parent class
-// TODO: Pass player object (entity) to state
 
 class PlayerJumpState : PlayerBaseState {
 
@@ -12,26 +8,25 @@ class PlayerJumpState : PlayerBaseState {
 
   public override void enter() 
   {
-    velocity.y = jumpSpeed;
+    velocity.y = JUMP_SPEED;
     anim.Animation = "Jump";
     isJumping = true;
   }
 
   public override IState update(float delta) 
   {
-    bool isPressingLeft = Input.IsActionPressed("left");
-    bool isPressingRight = Input.IsActionPressed("right");
+    getInput();
 
     if (isPressingLeft)
     {
-      velocity.x = -walkSpeed;
+      velocity.x = -WALK_SPEED;
     }
     else if (isPressingRight)
     {
-      velocity.x = walkSpeed;
+      velocity.x = WALK_SPEED;
     } 
 
-    velocity.y += delta * gravity;
+    velocity.y += delta * GRAVITY_SCALE;
 
     if (!isJumping) return new PlayerBaseState(this.anim, this.velocity);
     return null;
