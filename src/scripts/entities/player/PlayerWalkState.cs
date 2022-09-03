@@ -25,11 +25,13 @@ class PlayerWalkState : PlayerBaseState {
       velocity.x = WALK_SPEED;
       anim.FlipH = false;
     }
-    else if (isPressingUp)
+    
+    if (isPressingUp)
     {
       return new PlayerJumpState(anim, velocity);
     }
-    else
+    
+    if (!isPressingLeft && !isPressingRight && !isPressingUp)
     {
       return new PlayerBaseState(anim, velocity);
     }
