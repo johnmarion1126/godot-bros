@@ -17,7 +17,7 @@ height = 22.3924
 
 [node name="KinematicBody2D" type="KinematicBody2D"]
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+[node name="EnemyAnimation" type="AnimatedSprite" parent="."]
 position = Vector2( 79, 298 )
 scale = Vector2( 4, 4 )
 frames = SubResource( 1 )
