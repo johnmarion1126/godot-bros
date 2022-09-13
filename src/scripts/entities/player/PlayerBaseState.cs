@@ -1,9 +1,9 @@
 using Godot;
 
 class PlayerBaseState : KinematicBody2D, IState {
-  protected float GRAVITY_SCALE = 800.0f;
-  protected int WALK_SPEED = 250;
-  protected int JUMP_SPEED = -450;
+  protected float GRAVITY_SCALE = Constants.GRAVITY_SCALE;
+  protected int WALK_SPEED = Constants.WALK_SPEED;
+  protected int JUMP_SPEED = Constants.JUMP_SPEED;
 
   protected bool isJumping = false;
   protected bool isPressingLeft;
