@@ -21,8 +21,7 @@ public class Enemy : KinematicBody2D
   }
 
   public void onCollisionEnter(Area2D area) {
-    GD.Print(collision);
-    if (area.Name == "Player" ) QueueFree(); 
+    // if (area.Name == "Player" ) QueueFree(); 
   }
 
   public override void _PhysicsProcess(float delta)
