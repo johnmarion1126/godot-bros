@@ -8,6 +8,7 @@ public class Enemy : KinematicBody2D
 
   const int PIXEL_LEFT_OFFSET = -50;
   const int PIXEL_RIGHT_OFFSET = 100;
+  const int PIXEL_TOP_OFFSET = 43;
 
   Vector2 velocity;
   private AnimatedSprite anim;
@@ -21,7 +22,7 @@ public class Enemy : KinematicBody2D
   }
 
   public void onCollisionEnter(Area2D area) {
-    // if (area.Name == "Player" ) QueueFree(); 
+    if (area.Position.y <= this.Position.y - PIXEL_TOP_OFFSET) QueueFree();
   }
 
   public override void _PhysicsProcess(float delta)

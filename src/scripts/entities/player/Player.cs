@@ -11,7 +11,7 @@ class Player : KinematicBody2D {
   {
     anim = GetNode<AnimatedSprite>("PlayerAnimation");
     velocity = new Vector2();
-    collision = GetNode<CollisionShape2D>("Area2D/PlayerCollision");
+    collision = GetNode<CollisionShape2D>("PlayerHitBox/CollisionShape2D");
 
     currentState = new PlayerBaseState(anim, velocity, collision);
     currentState.enter();
