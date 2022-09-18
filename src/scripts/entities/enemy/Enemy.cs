@@ -11,11 +11,18 @@ public class Enemy : KinematicBody2D
 
   Vector2 velocity;
   private AnimatedSprite anim;
+  private CollisionShape2D collision;
 
   public override void _Ready()
   {
     anim = GetNode<AnimatedSprite>("EnemyAnimation");
+    collision = GetNode<CollisionShape2D>("EnemyCollisionShape2D");
     velocity = new Vector2();
+  }
+
+  public void onCollisionEnter(Area2D area) {
+    GD.Print(collision);
+    if (area.Name == "Player" ) QueueFree(); 
   }
 
   public override void _PhysicsProcess(float delta)

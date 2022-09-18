@@ -42,7 +42,6 @@ class PlayerBaseState : KinematicBody2D, IState {
   {
     for (int i = 0; i < 3; i += 1)
     {
-      GD.Print("HELLo");
       anim.Modulate = new Color(0, 0, 0);
       await Task.Delay(200);
       anim.Modulate = new Color(1, 1, 1);
