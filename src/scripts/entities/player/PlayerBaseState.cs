@@ -1,4 +1,5 @@
 using Godot;
+using System.Threading.Tasks;
 
 class PlayerBaseState : KinematicBody2D, IState {
   protected float GRAVITY_SCALE = Constants.GRAVITY_SCALE;
@@ -37,9 +38,22 @@ class PlayerBaseState : KinematicBody2D, IState {
     isPressingRight = Input.IsActionPressed("right");
   }
 
+  public async void takeDamage()
+  {
+    for (int i = 0; i < 3; i += 1)
+    {
+      GD.Print("HELLo");
+      anim.Modulate = new Color(0, 0, 0);
+      await Task.Delay(200);
+      anim.Modulate = new Color(1, 1, 1);
+      await Task.Delay(200);
+    }
+  }
+
   public void processCollision(Area2D area)
   {
     if (area.Name == "Ground" ) isJumping = false;
+    if (area.Name == "Turtle") takeDamage();
   }
 
   public virtual IState update(float delta) 
@@ -51,6 +65,4 @@ class PlayerBaseState : KinematicBody2D, IState {
     if (isPressingUp) return new PlayerJumpState(this.anim, this.velocity);
     return null;
   }
-
-
 }
