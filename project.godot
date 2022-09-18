@@ -19,6 +19,10 @@ config/icon="res://icon.png"
 window/size/width=450
 window/size/height=404
 
+[global]
+
+window=false
+
 [input]
 
 left={
