@@ -5,13 +5,15 @@ class Player : KinematicBody2D {
 
   public Vector2 velocity;
   public AnimatedSprite anim;
+  public CollisionShape2D collision;
 
   public override void _Ready()
   {
     anim = GetNode<AnimatedSprite>("PlayerAnimation");
     velocity = new Vector2();
+    collision = GetNode<CollisionShape2D>("Area2D/PlayerCollision");
 
-    currentState = new PlayerBaseState(anim, velocity);
+    currentState = new PlayerBaseState(anim, velocity, collision);
     currentState.enter();
   }
 

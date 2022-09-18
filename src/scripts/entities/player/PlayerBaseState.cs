@@ -13,11 +13,13 @@ class PlayerBaseState : KinematicBody2D, IState {
 
   protected Vector2 velocity;
   protected AnimatedSprite anim;
+  protected CollisionShape2D collision;
 
-  public PlayerBaseState(AnimatedSprite anim, Vector2 velocity)
+  public PlayerBaseState(AnimatedSprite anim, Vector2 velocity, CollisionShape2D collision)
   {
     this.velocity =  velocity;
     this.anim = anim; 
+    this.collision = collision;
   }
 
   public virtual void enter() 
@@ -40,13 +42,15 @@ class PlayerBaseState : KinematicBody2D, IState {
 
   public async void takeDamage()
   {
+    collision.SetDeferred("disabled", true);
     for (int i = 0; i < 3; i += 1)
     {
-      anim.Modulate = new Color(0, 0, 0);
-      await Task.Delay(200);
-      anim.Modulate = new Color(1, 1, 1);
-      await Task.Delay(200);
+      anim.Modulate = new Color(0, 0, 0, 0);
+      await Task.Delay(150);
+      anim.Modulate = new Color(1, 1, 1, 1);
+      await Task.Delay(150);
     }
+    collision.SetDeferred("disabled", false);
   }
 
   public void processCollision(Area2D area)
@@ -60,8 +64,8 @@ class PlayerBaseState : KinematicBody2D, IState {
     velocity.y += delta * GRAVITY_SCALE;
     getInput();
 
-    if (isPressingLeft || isPressingRight) return new PlayerWalkState(this.anim, this.velocity);
-    if (isPressingUp) return new PlayerJumpState(this.anim, this.velocity);
+    if (isPressingLeft || isPressingRight) return new PlayerWalkState(this.anim, this.velocity, this.collision);
+    if (isPressingUp) return new PlayerJumpState(this.anim, this.velocity, this.collision);
     return null;
   }
 }

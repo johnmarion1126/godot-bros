@@ -2,7 +2,7 @@ using Godot;
 
 class PlayerJumpState : PlayerBaseState {
 
-  public PlayerJumpState(AnimatedSprite anim, Vector2 velocity): base(anim ,velocity)
+  public PlayerJumpState(AnimatedSprite anim, Vector2 velocity, CollisionShape2D collision): base(anim ,velocity, collision)
   {
   }
 
@@ -28,7 +28,7 @@ class PlayerJumpState : PlayerBaseState {
 
     velocity.y += delta * GRAVITY_SCALE;
 
-    if (!isJumping) return new PlayerBaseState(this.anim, this.velocity);
+    if (!isJumping) return new PlayerBaseState(this.anim, this.velocity, this.collision);
     return null;
   }
 }
