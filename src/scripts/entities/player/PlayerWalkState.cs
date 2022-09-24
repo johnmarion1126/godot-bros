@@ -2,7 +2,7 @@ using Godot;
 
 class PlayerWalkState : PlayerBaseState {
 
-  public PlayerWalkState(AnimatedSprite anim, Vector2 velocity, CollisionShape2D collision): base(anim ,velocity, collision)
+  public PlayerWalkState(AnimatedSprite anim, Vector2 velocity, KinematicBody2D player): base(anim ,velocity, player)
   {
   }
 
@@ -28,12 +28,12 @@ class PlayerWalkState : PlayerBaseState {
     
     if (isPressingUp)
     {
-      return new PlayerJumpState(anim, velocity, collision);
+      return new PlayerJumpState(anim, velocity, player);
     }
     
     if (!isPressingLeft && !isPressingRight && !isPressingUp)
     {
-      return new PlayerBaseState(anim, velocity, collision);
+      return new PlayerBaseState(anim, velocity, player);
     }
 
     velocity.y += delta * GRAVITY_SCALE;

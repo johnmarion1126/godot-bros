@@ -6,7 +6,7 @@ public class Enemy : KinematicBody2D
   const int ENEMY_WALK_SPEED = Constants.ENEMY_WALK_SPEED;
   const int SCREEN_WIDTH = Constants.SCREEN_WIDTH;
 
-  const int PIXEL_LEFT_OFFSET = -50;
+  const int PIXEL_LEFT_OFFSET = -40;
   const int PIXEL_RIGHT_OFFSET = 100;
   const int PIXEL_TOP_OFFSET = 43;
 

@@ -12,15 +12,17 @@ class PlayerBaseState : KinematicBody2D, IState {
   protected bool isPressingRight;
   protected bool isPressingUp;
 
+  protected const int PLAYER_PIXEL_OFFSET = 40;
+
   protected Vector2 velocity;
   protected AnimatedSprite anim;
-  protected CollisionShape2D collision;
+  protected KinematicBody2D player;
 
-  public PlayerBaseState(AnimatedSprite anim, Vector2 velocity, CollisionShape2D collision)
+  public PlayerBaseState(AnimatedSprite anim, Vector2 velocity, KinematicBody2D player)
   {
     this.velocity =  velocity;
     this.anim = anim; 
-    this.collision = collision;
+    this.player = player;
   }
 
   public virtual void enter() 
@@ -54,7 +56,7 @@ class PlayerBaseState : KinematicBody2D, IState {
     inInvincible = false;
   }
 
-  public void processCollision(Area2D area)
+  public virtual void processCollision(Area2D area)
   {
     if (area.Name == "Ground" ) isJumping = false;
     if (area.Name == "Turtle" && !inInvincible) takeDamage();
@@ -65,8 +67,8 @@ class PlayerBaseState : KinematicBody2D, IState {
     velocity.y += delta * GRAVITY_SCALE;
     getInput();
 
-    if (isPressingLeft || isPressingRight) return new PlayerWalkState(this.anim, this.velocity, this.collision);
-    if (isPressingUp) return new PlayerJumpState(this.anim, this.velocity, this.collision);
+    if (isPressingLeft || isPressingRight) return new PlayerWalkState(this.anim, this.velocity, this.player);
+    if (isPressingUp) return new PlayerJumpState(this.anim, this.velocity, this.player);
     return null;
   }
 }
