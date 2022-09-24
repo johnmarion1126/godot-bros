@@ -6,6 +6,7 @@ class PlayerBaseState : KinematicBody2D, IState {
   protected int WALK_SPEED = Constants.WALK_SPEED;
   protected int JUMP_SPEED = Constants.JUMP_SPEED;
 
+  protected bool inInvincible = false;
   protected bool isJumping = false;
   protected bool isPressingLeft;
   protected bool isPressingRight;
@@ -42,7 +43,7 @@ class PlayerBaseState : KinematicBody2D, IState {
 
   public async void takeDamage()
   {
-    collision.SetDeferred("disabled", true);
+    inInvincible = true;
     for (int i = 0; i < 3; i += 1)
     {
       anim.Modulate = new Color(0, 0, 0, 0);
@@ -50,13 +51,13 @@ class PlayerBaseState : KinematicBody2D, IState {
       anim.Modulate = new Color(1, 1, 1, 1);
       await Task.Delay(150);
     }
-    collision.SetDeferred("disabled", false);
+    inInvincible = false;
   }
 
   public void processCollision(Area2D area)
   {
     if (area.Name == "Ground" ) isJumping = false;
-    if (area.Name == "Turtle") takeDamage();
+    if (area.Name == "Turtle" && !inInvincible) takeDamage();
   }
 
   public virtual IState update(float delta) 

@@ -1,5 +1,7 @@
 using Godot;
 
+// TODO: Fix collision and animation when it's disabled after hitting turtle
+// TODO: Make player jump after bouncing on top of enemy 
 class Player : KinematicBody2D {
   private IState currentState;
 
