@@ -8,16 +8,11 @@ extents = Vector2( 241.5, 28.5 )
 
 [node name="Main" type="Node2D"]
 
-[node name="Player" parent="." instance=ExtResource( 1 )]
-
-[node name="Turtle" parent="." instance=ExtResource( 2 )]
-position = Vector2( 296, 4 )
-
 [node name="Ground" type="ColorRect" parent="."]
-margin_left = -13.0
-margin_top = 362.0
-margin_right = 459.0
-margin_bottom = 412.0
+margin_left = -11.0
+margin_top = 357.0
+margin_right = 461.0
+margin_bottom = 407.0
 color = Color( 0.137255, 0.137255, 0.160784, 1 )
 
 [node name="Ground" type="StaticBody2D" parent="Ground"]
@@ -25,3 +20,9 @@ color = Color( 0.137255, 0.137255, 0.160784, 1 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ground/Ground"]
 position = Vector2( 231.5, 26.5 )
 shape = SubResource( 5 )
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 2, 4 )
+
+[node name="Turtle" parent="." instance=ExtResource( 2 )]
+position = Vector2( 298, 8 )
