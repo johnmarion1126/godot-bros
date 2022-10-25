@@ -8,12 +8,14 @@ class Player : KinematicBody2D {
   public Vector2 velocity;
   public AnimatedSprite anim;
 
+  public int PLAYER_HP = Constants.PLAYER_HP;
+
   public override void _Ready()
   {
     anim = GetNode<AnimatedSprite>("PlayerAnimation");
     velocity = new Vector2();
 
-    currentState = new PlayerBaseState(anim, velocity, this);
+    currentState = new PlayerBaseState(anim, velocity, this, PLAYER_HP);
     currentState.enter();
   }
 

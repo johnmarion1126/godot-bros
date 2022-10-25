@@ -2,7 +2,7 @@ using Godot;
 
 class PlayerWalkState : PlayerBaseState {
 
-  public PlayerWalkState(AnimatedSprite anim, Vector2 velocity, KinematicBody2D player): base(anim ,velocity, player)
+  public PlayerWalkState(AnimatedSprite anim, Vector2 velocity, KinematicBody2D player, int hp): base(anim ,velocity, player, hp)
   {
   }
 
@@ -28,13 +28,16 @@ class PlayerWalkState : PlayerBaseState {
     
     if (isPressingUp)
     {
-      return new PlayerJumpState(anim, velocity, player);
+      return new PlayerJumpState(anim, velocity, player, hp);
     }
     
     if (!isPressingLeft && !isPressingRight && !isPressingUp)
     {
-      return new PlayerBaseState(anim, velocity, player);
+      return new PlayerBaseState(anim, velocity, player, hp);
     }
+
+    if (hp == 0) return new PlayerFaintState(anim, velocity, player, hp);
+
 
     velocity.y += delta * GRAVITY_SCALE;
     return null;

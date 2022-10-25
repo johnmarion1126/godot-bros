@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://assets/sprites/GiditIdle.png" type="Texture" id=1]
 [ext_resource path="res://assets/sprites/GiditJump.png" type="Texture" id=2]
@@ -7,22 +7,28 @@
 [ext_resource path="res://assets/sprites/GiditWalk3.png" type="Texture" id=5]
 [ext_resource path="res://assets/sprites/GiditWalk2.png" type="Texture" id=6]
 [ext_resource path="res://src/scripts/entities/player/Player.cs" type="Script" id=7]
+[ext_resource path="res://assets/sprites/PlayerFaint.png" type="Texture" id=8]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
+"frames": [ ExtResource( 8 ) ],
+"loop": true,
+"name": "Faint",
+"speed": 5.0
+}, {
 "frames": [ ExtResource( 4 ), ExtResource( 6 ), ExtResource( 5 ), ExtResource( 3 ) ],
 "loop": true,
 "name": "Walk",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 2 ) ],
-"loop": true,
-"name": "Jump",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 1 ) ],
 "loop": true,
 "name": "Idle",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 2 ) ],
+"loop": true,
+"name": "Jump",
 "speed": 5.0
 } ]
 
@@ -42,8 +48,7 @@ script = ExtResource( 7 )
 position = Vector2( 75, 305 )
 scale = Vector2( 4, 4 )
 frames = SubResource( 1 )
-animation = "Walk"
-frame = 1
+animation = "Faint"
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

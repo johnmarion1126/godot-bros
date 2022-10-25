@@ -12,17 +12,21 @@ class PlayerBaseState : KinematicBody2D, IState {
   protected bool isPressingRight;
   protected bool isPressingUp;
 
+  protected bool fainting = false;
+
   protected const int PLAYER_PIXEL_OFFSET = 40;
 
   protected Vector2 velocity;
   protected AnimatedSprite anim;
   protected KinematicBody2D player;
+  protected int hp;
 
-  public PlayerBaseState(AnimatedSprite anim, Vector2 velocity, KinematicBody2D player)
+  public PlayerBaseState(AnimatedSprite anim, Vector2 velocity, KinematicBody2D player, int hp)
   {
     this.velocity =  velocity;
     this.anim = anim; 
     this.player = player;
+    this.hp = hp;
   }
 
   public virtual void enter() 
@@ -43,8 +47,18 @@ class PlayerBaseState : KinematicBody2D, IState {
     isPressingRight = Input.IsActionPressed("right");
   }
 
+  private void faint()
+  {
+    velocity.y = JUMP_SPEED;
+    anim.Animation = "Faint";
+    player.SetCollisionMaskBit(0, false);
+  }
+
   public async void takeDamage()
   {
+    hp -= 1;
+    if (hp == 0) faint();
+
     inInvincible = true;
     for (int i = 0; i < 3; i += 1)
     {
@@ -67,8 +81,11 @@ class PlayerBaseState : KinematicBody2D, IState {
     velocity.y += delta * GRAVITY_SCALE;
     getInput();
 
-    if (isPressingLeft || isPressingRight) return new PlayerWalkState(this.anim, this.velocity, this.player);
-    if (isPressingUp) return new PlayerJumpState(this.anim, this.velocity, this.player);
+    if (isPressingLeft || isPressingRight) return new PlayerWalkState(this.anim, this.velocity, this.player, this.hp);
+    if (isPressingUp) return new PlayerJumpState(this.anim, this.velocity, this.player, this.hp);
+
+    if (hp == 0) return new PlayerFaintState(this.anim, this.velocity, this.player, this.hp);
+
     return null;
   }
 }

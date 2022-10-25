@@ -2,7 +2,7 @@ using Godot;
 
 class PlayerJumpState : PlayerBaseState {
 
-  public PlayerJumpState(AnimatedSprite anim, Vector2 velocity, KinematicBody2D player): base(anim ,velocity, player)
+  public PlayerJumpState(AnimatedSprite anim, Vector2 velocity, KinematicBody2D player, int hp): base(anim ,velocity, player, hp)
   {
   }
 
@@ -37,7 +37,10 @@ class PlayerJumpState : PlayerBaseState {
 
     velocity.y += delta * GRAVITY_SCALE;
 
-    if (!isJumping) return new PlayerBaseState(anim, velocity, player);
+    if (!isJumping) return new PlayerBaseState(anim, velocity, player, hp);
+
+    if (hp == 0) return new PlayerFaintState(anim, velocity, player, hp);
+
     return null;
   }
 }
